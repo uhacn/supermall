@@ -1,22 +1,24 @@
 <template>
   <div id="app">
     <router-view />
-    <main-tab-bar />
+    <main-tab-bar class="main-tab-bar" />
   </div>
 </template>
 
 <script>
-import MainTabBar from 'components/content/maintabbar/MainTabBar'
-
+import MainTabBar from "components/content/maintabbar/MainTabBar";
 
 export default {
   name: "App",
   components: {
-    MainTabBar
+    MainTabBar,
   },
 };
 </script>
 
 <style>
- @import "assets/css/base.css"
+@import "assets/css/base.css";
+.main-tab-bar {
+  z-index: 99;
+}
 </style>
