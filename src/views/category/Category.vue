@@ -142,7 +142,6 @@ export default {
 <style>
 .wrapper {
   height: 150px;
-  background-color: rgb(226, 193, 193);
 
   overflow: hidden;
   /*overflow-y: scroll;*/
