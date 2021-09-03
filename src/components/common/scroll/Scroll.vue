@@ -14,10 +14,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    probeType: {
+      type: Number,
+      default: 3
+    }
   },
   data() {
     return {
-      scroll: null,
+      scroll: {},
     };
   },
   mounted() {
@@ -25,21 +29,25 @@ export default {
     this.scroll = new BScroll(this.$refs.wrapper, {
       observeDOM: true,
       click: true,
-      probeType: 3,
+      probeType: this.probeType,
       pullUpLoad: this.pullUpLoad,
     });
 
     // 2.监听滚动的位置
-    this.scroll.on("scroll", (position) => {
-      this.$emit("scroll", position);
-    });
+    if (this.probeType === 2 || this.probeType === 3) {
+      this.scroll.on("scroll", (position) => {
+        this.$emit("scroll", position);
+      });
+    }
 
     // 3.监听上拉事件
-    this.scroll.on("pullingUp", () => {
-      this.$emit("pullingUp");
-      // 完成加载
-      this.scroll && this.scroll.finishPullUp();
-    });
+    if (this.pullUpLoad) {
+      this.scroll.on("pullingUp", () => {
+        this.$emit("pullingUp");
+        // 完成加载
+        this.scroll && this.scroll.finishPullUp();
+      });
+    }
   },
   methods: {
     refresh() {

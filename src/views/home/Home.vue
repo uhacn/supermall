@@ -23,6 +23,7 @@
         @tabIndex="tabIndex"
         ref="tabControl"
       />
+
       <goods-list :goods="showGoods" />
     </scroll>
 
@@ -43,6 +44,7 @@ import BackTop from "components/content/backtop/BackTop";
 
 import { getHomeMultidata, getHomeGoods } from "network/home";
 import { debounce } from "common/utils";
+import { imgListenerMixin } from "common/mixin"
 
 export default {
   components: {
@@ -55,6 +57,7 @@ export default {
     Scroll,
     BackTop,
   },
+  mixins:[imgListenerMixin],
   data() {
     return {
       banner: [],
@@ -65,7 +68,7 @@ export default {
         sell: { page: 0, list: [] },
       },
       currentType: "pop",
-      isShow: true,
+      isShow: false,
       tabTop: 0,
       isTabFixed: false,
       saveY: 0,
@@ -84,6 +87,9 @@ export default {
   deactivated() {
     // 记录离开时的位置
     this.saveY = this.$refs.thisscroll.scroll.y;
+
+    // 取消对图片的监听
+    this.$bus.$off('goodsImageLoad', this.imgListener)
   },
   created() {
     // 1.请求轮播图和推荐模块数据
@@ -93,20 +99,21 @@ export default {
     this.getHomeGoods("pop");
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
-  },
-  mounted() {
-    // 3.监听商品图片是否加载完成
-    // 防抖动
-    const refresh = debounce(this.$refs.thisscroll.refresh, 10);
-    // 事件总线
-    this.$bus.$on("goodsImageLoad", () => {
-      refresh();
-    });
-    // this.$bus.$on("goodsImageLoad", () => {
-    //   this.$refs.thisscroll.scroll.refresh();
-    //   console.log(111);
-    // });
-  },
+  }, 
+  // mounted() {
+  //   // 3.监听商品图片是否加载完成
+  //   // 防抖动
+  //   const refresh = debounce(this.$refs.thisscroll.refresh, 10);
+  //   // 事件总线
+  //   this.$bus.$on("goodsImageLoad", () => {
+  //     refresh();
+  //     console.log(11);
+  //   });
+  //   // this.$bus.$on("goodsImageLoad", () => {
+  //   //   this.$refs.thisscroll.scroll.refresh();
+  //   //   console.log(111);
+  //   // });
+  // },
   methods: {
     // 点击导航栏切换模块
     tabIndex(index) {
@@ -127,6 +134,8 @@ export default {
 
       // 2.决定tabControl是否吸顶(position: fixed)
       this.isTabFixed = position.y < -this.tabTop;
+      // console.log(this.isTabFixed);
+      // console.log(position.y);
     },
     // 上拉加载更多
     loadMore() {

@@ -7,7 +7,7 @@
     />
   </div>
 </template>
-
+ 
 <script>
 import GoodsListItem from "./GoodsListItem.vue";
 export default {

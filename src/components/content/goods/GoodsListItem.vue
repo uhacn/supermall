@@ -1,6 +1,6 @@
 <template>
   <div class="goods-item" @click="itemClick">
-    <img :src="goodsItem.show.img" alt="" @load="imageLoad" />
+    <img :src="showImage" alt="" @load="imageLoad" />
     <div class="goods-info">
       <p>{{ goodsItem.title }}</p>
       <span class="price">{{ goodsItem.price }}</span>
@@ -19,7 +19,13 @@ export default {
       },
     },
   },
-  methods: {
+  computed: {
+     showImage() {
+       // 选择图片的不同路径
+       return this.goodsItem.show? this.goodsItem.show.img : this.goodsItem.image 
+     }
+  },
+  methods: { 
     imageLoad() {
       // 事件总线
       this.$bus.$emit("goodsImageLoad");

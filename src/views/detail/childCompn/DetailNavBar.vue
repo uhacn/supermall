@@ -43,7 +43,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .title {
   display: flex;
   font-size: 14px;
