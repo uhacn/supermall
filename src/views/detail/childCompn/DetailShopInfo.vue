@@ -53,7 +53,7 @@
       }
     }
 	}
-</script>
+</script> 
 
 <style scoped>
   .shop-info {
@@ -154,4 +154,5 @@
     line-height: 30px;
     border-radius: 10px;
   }
+
 </style>

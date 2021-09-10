@@ -35,10 +35,13 @@ export default {
   methods: {
     titleItemClick(index) {
       this.currentIndex = index;
+      console.log(this.currentIndex);
+      console.log(index);
+      this.$emit("titleClick", index);
     },
     backClick() {
-      this.$router.back()
-    }
+      this.$router.back();
+    },
   },
 };
 </script>
@@ -61,4 +64,6 @@ export default {
   margin-top: 12px;
   width: 21px;
 }
+
+
 </style>
