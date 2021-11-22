@@ -6,7 +6,7 @@
     <main-tab-bar class="main-tab-bar"/>
   </div>
 </template>
-
+ 
 <script>
 import MainTabBar from "components/content/maintabbar/MainTabBar";
 
