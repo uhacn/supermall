@@ -66,7 +66,7 @@ export default {
 }
 
 .bar-left .service {
-  background-position: 0 -54px;
+  background-position: 0 -52px;
 }
 
 .bar-left .shop {
@@ -80,11 +80,10 @@ export default {
 }
 
 .bar-right .cart {
-  background-color: #ffe817;
-  color: #333;
+  background-color: #f8922b;
 }
 
 .bar-right .buy {
-  background-color: #f69;
+  background-color: #fa613b;
 }
 </style>

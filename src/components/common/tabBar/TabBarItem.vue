@@ -1,8 +1,14 @@
 <template>
   <div class="tab-bar-item" @click="itemClick">
-    <div v-if="isActive"><slot name="item-icon-active"></slot></div>
-    <div v-else><slot name="item-icon"></slot></div>
-    <div :style="activeStyle"><slot name="item-text"></slot></div>
+    <div v-if="isActive">
+      <slot name="item-icon-active"></slot>
+      </div>
+    <div v-else>
+      <slot name="item-icon"></slot>
+      </div>
+    <div :style="activeStyle">
+      <slot name="item-text"></slot>
+      </div>
   </div>
 </template>
 
@@ -12,7 +18,7 @@ export default {
     path: String,
     activeColor: {
       type: String,
-      default: "#ff5777",
+      default: "#f8922b",
     },
   },
   data() {

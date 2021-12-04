@@ -8,7 +8,7 @@
       />
       <span>全选</span>
     </div>
-    <div class="totalPrice">合计: {{ totalPrice }}</div>
+    <div class="totalPrice">合计: <span>¥ </span><span>{{ totalPrice }}</span></div>
     <div class="toCalculate" @click="calcClick">结算({{ goodsCounter }})</div>
   </div>
 </template>
@@ -23,7 +23,6 @@ export default {
     // 计算总价格
     totalPrice() {
       return (
-        "￥" +
         this.$store.getters.cartList
           .filter((item) => {
             return item.check;
@@ -97,9 +96,21 @@ export default {
   margin-left: 20px;
 }
 
+.totalPrice span {
+  font-weight: 700;
+  color: rgb(248, 110, 46);
+}
+.totalPrice span:first-child {
+  font-size: 14px;
+}
+
+.totalPrice span:last-child {
+  font-size: 20px;
+}
+
 .toCalculate {
   width: 100px;
-  background-color: orangered;
+  background-color: var( --color-tint);
   color: #fff;
   text-align: center;
 }

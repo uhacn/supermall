@@ -156,6 +156,12 @@ export default {
       getHomeMultidata().then((res) => {
         this.banner = res.data.banner.list;
         this.recommend = res.data.recommend.list;
+        for(let index in this.banner) {
+          this.banner[index].imagee = this.banner[index].image
+          this.banner[index].linkk = this.banner[index].link
+        }
+        console.log(this.banner);
+        console.log(this.recommend);
       });
     },
     // 加载商品
@@ -179,6 +185,8 @@ export default {
 .home-nav {
   background-color: var(--color-tint);
   color: #fff;
+  font-weight: 700;
+  font-size: 16px;
 
   /*在使用浏览器原生滚动时, 为了让导航不跟随一起滚动*/
   /* position: fixed;
@@ -191,7 +199,7 @@ export default {
 
 .tab-control {
   position: relative;
-  z-index: 9;
+  z-index: 1;
 }
 
 .content {

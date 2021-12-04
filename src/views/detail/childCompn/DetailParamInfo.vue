@@ -62,7 +62,7 @@
   }
 
   .param-value {
-    color: #eb4868
+    color: #f8922b
   }
 
   .info-img img {

@@ -1,8 +1,10 @@
 <template>
   <div id="shop-item">
     <div class="item-selector">
-      <check-button :isCheck="goodsInfo.check"
-      @click.native="checkChange"></check-button>
+      <check-button
+        :isCheck="goodsInfo.check"
+        @click.native="checkChange"
+      ></check-button>
     </div>
     <div class="item-img">
       <img :src="goodsInfo.imgURL" alt="商品图片" />
@@ -11,8 +13,10 @@
       <div class="item-title">{{ goodsInfo.title }}</div>
       <div class="item-desc">商品描述: {{ goodsInfo.desc }}</div>
       <div class="info-bottom">
-        <div class="item-price left">¥{{ goodsInfo.newPrice }}</div>
-        <div class="item-count right">x{{ goodsInfo.count }}</div>
+        <div class="item-price left">
+          <span>¥</span>{{ goodsInfo.newPrice }}
+        </div>
+        <div class="item-count right">x {{ goodsInfo.count }}</div>
       </div>
     </div>
   </div>
@@ -33,11 +37,11 @@ export default {
     CheckButton,
   },
   methods: {
-   checkChange() {
-     // 改变选中状态
-      this.goodsInfo.check = !this.goodsInfo.check
-    }
-  }
+    checkChange() {
+      // 改变选中状态
+      this.goodsInfo.check = !this.goodsInfo.check;
+    },
+  },
 };
 </script>
 
@@ -98,7 +102,20 @@ export default {
   right: 10px;
 }
 
-.info-bottom .item-price {
-  color: orangered;
+.item-price {
+  font-weight: 700;
+  color: rgb(248, 110, 46);
+  padding-top: 7px;
+}
+
+.item-price span {
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.item-count {
+  padding: 3px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
 }
 </style>

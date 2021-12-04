@@ -35,8 +35,6 @@ export default {
   methods: {
     titleItemClick(index) {
       this.currentIndex = index;
-      console.log(this.currentIndex);
-      console.log(index);
       this.$emit("titleClick", index);
     },
     backClick() {

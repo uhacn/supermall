@@ -1,149 +1,151 @@
 <template>
-  <div class="wrapper" ref="aaaa">
+  <div id="category">
+    <nav-bar class="navbar">
+      <div slot="center">商品分类</div>
+    </nav-bar>
     <div class="content">
-      <h2>分类</h2>
-      <button @click="btnClick">按钮</button>
-
-      <li>分类列表1</li>
-      <li>分类列表2</li>
-      <li>分类列表3</li>
-      <li>分类列表4</li>
-      <li>分类列表5</li>
-      <li>分类列表6</li>
-      <li>分类列表7</li>
-      <li>分类列表8</li>
-      <li>分类列表9</li>
-      <li>分类列表10</li>
-      <li>分类列表11</li>
-      <li>分类列表12</li>
-      <li>分类列表13</li>
-      <li>分类列表14</li>
-      <li>分类列表15</li>
-      <li>分类列表16</li>
-      <li>分类列表17</li>
-      <li>分类列表18</li>
-      <li>分类列表19</li>
-      <li>分类列表20</li>
-      <li>分类列表21</li>
-      <li>分类列表22</li>
-      <li>分类列表23</li>
-      <li>分类列表24</li>
-      <li>分类列表25</li>
-      <li>分类列表26</li>
-      <li>分类列表27</li>
-      <li>分类列表28</li>
-      <li>分类列表29</li>
-      <li>分类列表30</li>
-      <li>分类列表31</li>
-      <li>分类列表32</li>
-      <li>分类列表33</li>
-      <li>分类列表34</li>
-      <li>分类列表35</li>
-      <li>分类列表36</li>
-      <li>分类列表37</li>
-      <li>分类列表38</li>
-      <li>分类列表39</li>
-      <li>分类列表40</li>
-      <li>分类列表41</li>
-      <li>分类列表42</li>
-      <li>分类列表43</li>
-      <li>分类列表44</li>
-      <li>分类列表45</li>
-      <li>分类列表46</li>
-      <li>分类列表47</li>
-      <li>分类列表48</li>
-      <li>分类列表49</li>
-      <li>分类列表50</li>
-      <li>分类列表51</li>
-      <li>分类列表52</li>
-      <li>分类列表53</li>
-      <li>分类列表54</li>
-      <li>分类列表55</li>
-      <li>分类列表56</li>
-      <li>分类列表57</li>
-      <li>分类列表58</li>
-      <li>分类列表59</li>
-      <li>分类列表60</li>
-      <li>分类列表61</li>
-      <li>分类列表62</li>
-      <li>分类列表63</li>
-      <li>分类列表64</li>
-      <li>分类列表65</li>
-      <li>分类列表66</li>
-      <li>分类列表67</li>
-      <li>分类列表68</li>
-      <li>分类列表69</li>
-      <li>分类列表70</li>
-      <li>分类列表71</li>
-      <li>分类列表72</li>
-      <li>分类列表73</li>
-      <li>分类列表74</li>
-      <li>分类列表75</li>
-      <li>分类列表76</li>
-      <li>分类列表77</li>
-      <li>分类列表78</li>
-      <li>分类列表79</li>
-      <li>分类列表80</li>
-      <li>分类列表81</li>
-      <li>分类列表82</li>
-      <li>分类列表83</li>
-      <li>分类列表84</li>
-      <li>分类列表85</li>
-      <li>分类列表86</li>
-      <li>分类列表87</li>
-      <li>分类列表88</li>
-      <li>分类列表89</li>
-      <li>分类列表90</li>
-      <li>分类列表91</li>
-      <li>分类列表92</li>
-      <li>分类列表93</li>
-      <li>分类列表94</li>
-      <li>分类列表95</li>
-      <li>分类列表96</li>
-      <li>分类列表97</li>
-      <li>分类列表98</li>
-      <li>分类列表99</li>
-      <li>分类列表100</li>
+      <tab-menu :categories="categories" @itemClick="categoryClick"> </tab-menu>
+      <scroll id="tab-content">
+        <div>
+          <tab-content-category
+            :subcategories="thisSubCategories"
+          ></tab-content-category>
+          <tab-control
+            :titles="['综合', '新品', '销量']"
+            @tabIndex="titleClick"
+          ></tab-control>
+          <tab-content-detail :categoryDetail="thisCategoriesDetail">
+          </tab-content-detail>
+        </div>
+      </scroll>
     </div>
   </div>
 </template>
 
 <script>
-import BetterScroll from "better-scroll";
+import NavBar from "components/common/navbar/NavBar";
+import Scroll from "components/common/scroll/Scroll";
+import TabControl from "components/content/tabControl/TabControl";
+
+import TabMenu from "./childCompn/TabMenu.vue";
+import TabContentCategory from "./childCompn/TabContentCategory";
+import TabContentDetail from "./childCompn/TabContentDetail";
+
+import {
+  getCategory,
+  getSubcategory,
+  getCategoryDetail,
+} from "network/category";
+import { POP, SELL, NEW } from "common/const";
 
 export default {
+  name: "Category",
+  components: {
+    NavBar,
+    TabMenu,
+    Scroll,
+    TabContentCategory,
+    TabControl,
+    TabContentDetail,
+  },
   data() {
     return {
-      scroll: null,
+      categories: [],
+      categoriesData: [],
+      currentIndex: 0,
+      thisSubCategories: {},
+      currentType: "",
+      thisCategoriesDetail: [],
     };
   },
-  mounted() {
-    console.log(this.$refs.aaaa);
-    this.scroll = new BetterScroll(this.$refs.aaaa, {
-      // probeType: 3, 
-      pullUpLoad: true
-    });
-    this.scroll.on("scroll", (position) => {
-      // console.log(position);
-    });
-
-    this.scroll.on("pullingUp", () => {
-      console.log("上啦加载更多");
-    });
+  created() {
+    this._getCategory();
   },
   methods: {
-    btnClick() {
-      console.log("btnClick");
+    _getCategory() {
+      getCategory().then((res) => {
+        // 1.获取分类标题
+        this.categories = res.data.category.list;
+        // 2.初始化每个类别里的数据
+        for (let i = 0; i < this.categories.length; i++) {
+          this.categoriesData[i] = {
+            subCategories: [],
+            categoryDetail: {
+              pop: [],
+              new: [],
+              sell: [],
+            },
+          };
+        }
+        // 3.请求第一个分类的数据
+        this._getSubCategories(0);
+      });
+    },
+    async _getSubCategories(index) {
+      this.currentIndex = index;
+      // 1.获取分类的key
+      const maitKey = this.categories[index].maitKey;
+      // 2. 获取副分类数据
+      await getSubcategory(maitKey).then((res) => {
+        this.categoriesData[index].subCategories = res.data;
+        // 请求当前类别详细商品数据
+        this._getCategoryDetail(POP);
+        // this._getCategoryDetail(NEW);
+        // this._getCategoryDetail(SELL);
+      });
+      // 返回当前类别分类数据
+      this.thisSubCategories =
+        this.categoriesData[this.currentIndex].subCategories;
+    },
+    async _getCategoryDetail(type) {
+      this.currentType = type;
+      // 1.获取请求的miniWallkey
+      const miniWallkey = this.categories[this.currentIndex].miniWallkey;
+      // 2.获取商品数据
+      await getCategoryDetail(miniWallkey, type).then((res) => {
+        this.categoriesData[this.currentIndex].categoryDetail[type] = res;
+      });
+      // 传递当前type的数据   
+      this.thisCategoriesDetail =
+        this.categoriesData[this.currentIndex].categoryDetail[this.currentType];
+    },
+    categoryClick(index) {
+      // 点击分类列表调用获取数据方法
+      this._getSubCategories(index);
+    },
+    titleClick(index) {
+      // 根据点击标题显示相应商品
+      this._getCategoryDetail([POP, NEW, SELL][index]);
     },
   },
 };
 </script>
 
-<style>
-.wrapper {
-  height: 150px;
+<style scoped>
+#category {
+  height: 100vh;
+}
 
+.navbar {
+  background-color: var(--color-tint);
+  font-weight: 700;
+  color: #fff;
+  z-index: 999;
+}
+
+.content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 44px;
+  bottom: 49px;
+
+  display: flex;
+}
+
+#tab-content {
+  height: 100%;
+  flex: 1;
   overflow: hidden;
-  /*overflow-y: scroll;*/
 }
 </style>

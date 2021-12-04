@@ -7,14 +7,14 @@
 <script>
 export default {
   props: {
-    // message: {
-    //   type: String,
-    //   default: 'hhhhhh'
-    // },
-    // isShow: {
-    //   type: Boolean,
-    //   default: false
-    // }
+    message: {
+      type: String,
+      default: 'hhhhhh'
+    },
+    isShow: {
+      type: Boolean,
+      default: false
+    }
   },
   methods: {
     show(message="默认文字", duration=1000) {
@@ -36,15 +36,15 @@ export default {
 .toast {
   position: fixed;
   left: 50%;
-  top: 50%;
+  top: 40%;
   transform: translate(-50%, -50%);
 
   z-index: 999;
 
   border-radius: 6px;
-  padding: 8px 12px;
+  padding: 12px 16px;
 
-  font-size: 15px;
+  font-size: 16px;
   color: #fff;
   background-color: rgba(0, 0, 0, .7);
 }

@@ -59,7 +59,7 @@ export default {
     DetailBaseInfo,
     DetailShopInfo,
     DetailGoodsInfo,
-    DetailParamInfo,
+    DetailParamInfo, 
     DetailCommentInfo,
     DetailRecommend,
     DetailBottomBar,
@@ -205,7 +205,7 @@ export default {
 <style scoped>
 #detail {
   position: relative;
-  z-index: 9;
+  z-index: 999;
   background-color: #fff;
   height: 100vh;
 }

@@ -9,7 +9,9 @@
 </template>
  
 <script>
+
 import GoodsListItem from "./GoodsListItem.vue";
+
 export default {
   components: {
     GoodsListItem,

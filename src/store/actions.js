@@ -12,7 +12,7 @@ export default {
         goods.count = 1;
         goods.check = true;
         context.state.cartList.push(goods)
-        resolve('添加新商品')
+        resolve('加入购物车成功')
       }
     })
   }

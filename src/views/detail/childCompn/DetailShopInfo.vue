@@ -122,21 +122,22 @@
   }
 
   .shop-middle-right .score {
-    color: #5ea732;
+    color: #7ccf1d;;
   }
 
   .shop-middle-right .score-better {
-    color: #f13e3a;
+    color: #fc8a18;
   }
 
   .shop-middle-right .better span {
-    background-color: #5ea732;
+    border-radius: 2px;
+    background-color: #7ccf1d;
     color: #fff;
     text-align: center;
   }
 
   .shop-middle-right .better-more span {
-    background-color: #f13e3a;
+    background-color: #fc8a18;
   }
 
   .shop-bottom {

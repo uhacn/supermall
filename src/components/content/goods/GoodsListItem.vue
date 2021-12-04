@@ -3,7 +3,7 @@
     <img v-lazy="showImage" alt="" @load="imageLoad" />
     <div class="goods-info">
       <p>{{ goodsItem.title }}</p>
-      <span class="price">{{ goodsItem.price }}</span>
+      <span class="price">¥ {{ goodsItem.price }}</span>
       <span class="collect">{{ goodsItem.cfav }}</span>
     </div>
   </div>
@@ -11,6 +11,7 @@
 
 <script>
 export default {
+  name: "GoodsListItem",
   props: {
     goodsItem: {
       type: Object,
@@ -20,18 +21,21 @@ export default {
     },
   },
   computed: {
-     showImage() {
-       // 选择图片的不同路径
-       return this.goodsItem.show? this.goodsItem.show.img : this.goodsItem.image 
-     }
+    showImage() {
+      // 选择图片的不同路径
+      return (
+        this.goodsItem.img || this.goodsItem.image || this.goodsItem.show.img
+      );
+    },
   },
-  methods: { 
+  methods: {
     imageLoad() {
       // 事件总线
       this.$bus.$emit("goodsImageLoad");
     },
     // 点击跳转详情页
     itemClick() {
+      console.log(this.goodsItem);
       this.$router.push("/detail/" + this.goodsItem.iid);
     },
   },
@@ -71,6 +75,7 @@ export default {
 .goods-info .price {
   color: var(--color-high-text);
   margin-right: 20px;
+  font-weight: 700
 }
 
 .goods-info .collect {
@@ -84,7 +89,7 @@ export default {
   top: -1px;
   width: 14px;
   height: 14px;
-  background: url("~assets/img/common/collect.svg") 0 0/14px 14px;
+ background: url("~assets/img/detail/detail_bottom.png") 0 -16px/100%;
 }
 </style>
 

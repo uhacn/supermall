@@ -21,7 +21,7 @@ export default {
   border: 2px solid #aaa;
 }
 .check {
-  background-color: red;
-  border-color: red;
+  background-color: var( --color-high-text);
+  border-color: var( --color-high-text);
 }
 </style>
