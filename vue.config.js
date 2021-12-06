@@ -9,6 +9,14 @@ module.exports = {
         'views': '@/views',
       }
     }
+  },
+  chainWebpack: config => {
+    config
+      .plugin('html')
+      .tap(args => {
+        args[0].title = "美丽街";
+        return args
+    })
   }
 }
 

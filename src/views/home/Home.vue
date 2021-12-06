@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <nav-bar class="home-nav"><div slot="center">购物街</div></nav-bar>
+    <nav-bar class="home-nav"><div slot="center">美丽街</div></nav-bar>
     <tab-control
       class="tab-control"
       :titles="['流行', '新款', '精选']"
@@ -160,8 +160,6 @@ export default {
           this.banner[index].imagee = this.banner[index].image
           this.banner[index].linkk = this.banner[index].link
         }
-        console.log(this.banner);
-        console.log(this.recommend);
       });
     },
     // 加载商品
