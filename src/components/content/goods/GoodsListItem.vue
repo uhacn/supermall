@@ -35,7 +35,6 @@ export default {
     },
     // 点击跳转详情页
     itemClick() {
-      console.log(this.goodsItem);
       this.$router.push("/detail/" + this.goodsItem.iid);
     },
   },

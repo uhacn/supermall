@@ -156,10 +156,6 @@ export default {
       getHomeMultidata().then((res) => {
         this.banner = res.data.banner.list;
         this.recommend = res.data.recommend.list;
-        for(let index in this.banner) {
-          this.banner[index].imagee = this.banner[index].image
-          this.banner[index].linkk = this.banner[index].link
-        }
       });
     },
     // 加载商品
