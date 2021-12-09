@@ -17,7 +17,6 @@ module.exports = {
         args[0].title = "美丽街";
         return args
     })
-  },
-  publicPath: "./" 
+  }
 }
 
